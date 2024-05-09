@@ -72,6 +72,7 @@ defmodule Astarte.VMQ.Plugin.AMQPClient do
       |> Keyword.delete(:sharding_key)
       |> Keyword.put(:persistent, true)
       |> Keyword.put(:mandatory, true)
+      |> Keyword.put(:arguments, ["x-queue-type": "quorum"])
 
     queue_prefix = Config.data_queue_prefix()
     queue_index = :erlang.phash2(sharding_key, Config.data_queue_count())
